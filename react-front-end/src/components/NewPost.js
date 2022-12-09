@@ -38,7 +38,7 @@ const NewPost = (props) => {
             {
                 user: newPostUser,
                 postBody: newPostBody,
-                imageURL: newPostURL,
+                imageURL: newPostImage,
                 linkURL: newPostURL,
                 likes: [],
                 comments: []
