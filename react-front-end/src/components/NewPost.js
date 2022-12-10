@@ -34,7 +34,7 @@ const NewPost = (props) => {
 
     const handlePostSubmit = (event) => {
         event.preventDefault()
-        axios.post('#',//heroku deployed API url goes here
+        axios.post('https://evening-mesa-52036.herokuapp.com/',//heroku deployed API url goes here
             {
                 user: newPostUser,
                 postBody: newPostBody,
@@ -51,6 +51,8 @@ const NewPost = (props) => {
                 setNewPostImage('')
                 setNewPostURL('')
                 setNewPostUser('')
+                props.handleHideNewForm()
+                props.updatePosts()
             })
     }
 
@@ -58,7 +60,10 @@ const NewPost = (props) => {
     //Return form for new post submit
     //////////////////////////////////////
     return (
-        <div className='new-post-form'>
+        <div className='modal-form'>
+            <div className='modal-header'>
+                <button onClick={props.handleHideNewForm} className='close-button'>Cancel</button>
+            </div>
             <form onSubmit={handlePostSubmit}>
                 <label htmlFor='user'>Poster Username:</label><br />
                 <input name='user' type="text" onChange={handleUser} /><br />
