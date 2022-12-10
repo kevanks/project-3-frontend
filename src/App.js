@@ -45,7 +45,7 @@ function App() {
       <div className='card-container'>
         {allPosts.map((post) => {
           return (
-            <PostCard post={post} />
+            <PostCard post={post} setAllPosts={setAllPosts}/>
           )
         })}
       </div>
