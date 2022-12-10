@@ -1,4 +1,4 @@
-const PostCard = (props) => {
+const PostCard = (props) => {// need to update with ternaries
     return (
         <div className="card">
             <p>{props.post.user}</p>
@@ -8,3 +8,5 @@ const PostCard = (props) => {
         </div>
     )
 }
+
+export default PostCard
