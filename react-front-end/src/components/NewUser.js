@@ -30,6 +30,10 @@ const NewUser = (props) => {
 
     const handleNewUserSubmit = (event) => {
         event.preventDefault()
+        console.log({// testing until endpoint is available
+            username: newUsername,
+            password: newPassword
+        });
         // need to insert logic here to validate password, check if unique username, etc.
         axios.post('https://evening-mesa-52036.herokuapp.com/newuser',
             {
