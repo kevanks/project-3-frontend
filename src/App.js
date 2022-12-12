@@ -61,9 +61,11 @@ function App() {
 
     < main >
       <h1>Message Board</h1>
-      <button onClick={handleShowNewForm}>New Post</button>
-      <button onClick={handleShowNewUserForm}>Sign Up!</button>
-      <button onClick={handleShowLoginForm}>Log In</button>
+      <div className='button-container'>
+        <button className='button-50' onClick={handleShowNewForm}>New Post</button>
+        <button className='button-50' onClick={handleShowNewUserForm}>Sign Up!</button>
+        <button className='button-50' onClick={handleShowLoginForm}>Log In</button>
+      </div>
       <div id='new-post-modal' className='modal hidden'>
         <NewPost updatePosts={updatePosts} handleHideNewForm={handleHideNewForm} />
       </div>
