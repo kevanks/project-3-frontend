@@ -69,6 +69,7 @@ const PostCard = (props) => {// need to update with ternaries
 
   // edit feature
   const handleUpdatedPost = (postsData) => {
+    postsData.preventDefault()
     axios.put(`https://evening-mesa-52036.herokuapp.com/${postsData._id}`,
       {
         user: updatedUser,
@@ -76,7 +77,7 @@ const PostCard = (props) => {// need to update with ternaries
         imageURL: updatedPostImg,
         linkURL: updatedPostUrl
       }
-      )
+    )
   }
 
   // delete feature
@@ -90,44 +91,44 @@ const PostCard = (props) => {// need to update with ternaries
   }
 
 
-    return (
-      <div>
-        <div className="card" onClick={revealModal}>
-            <p>Posted by {props.post.user}</p>
-            <p className="post-body">{props.post.postBody}</p>
-            <img src={props.post.imageURL} />
-            <a href={props.post.linkURL}>{props.post.linkURL}</a><br/>
-        </div>
-        {(showModal) ?
+  return (
+    <div>
+      <div className="card" onClick={revealModal}>
+        <p>Posted by {props.post.user}</p>
+        <p className="post-body">{props.post.postBody}</p>
+        <img src={props.post.imageURL} />
+        <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
+      </div>
+      {(showModal) ?
         <div id="modal-post">
-            <p>Posted by {props.post.user}</p>
-            <p className="post-body">{props.post.postBody}</p>
-            <img src={props.post.imageURL} />
-            <a href={props.post.linkURL}>{props.post.linkURL}</a><br/>
-            <button onClick={hideModal}>Close</button>
-            <button onClick={revealModalEdit}>Edit</button>
-            <button onClick={()=>{deletePost(props.post)}}>Delete</button>
+          <p>Posted by {props.post.user}</p>
+          <p className="post-body">{props.post.postBody}</p>
+          <img src={props.post.imageURL} />
+          <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
+          <button onClick={hideModal}>Close</button>
+          <button onClick={revealModalEdit}>Edit</button>
+          <button onClick={() => { deletePost(props.post) }}>Delete</button>
         </div>
-        : null }
-        {(showModalEdit) ?
+        : null}
+      {(showModalEdit) ?
         <div id="modal-edit">
-          <form onSubmit={()=> {handleUpdatedPost(props.post)}}>
-              <label htmlFor='user'>Poster Username:</label><br />
-              <input name='user' type="text" defaultValue={props.post.user} onKeyUp={handleUpdatedUser} /><br />
-              <label htmlFor='body'>Post Body:</label><br />
-              <input name='body' type="text" defaultValue={props.post.postBody} onKeyUp={handleUpdatedPostBody} /><br />
-              <label htmlFor='image'>Include an image:</label><br />
-              <input name='image' type="text" defaultValue={props.post.imageURL} onKeyUp={handleUpdatedPostImg} /><br />
-              <label htmlFor='url'>Link to an outside article:</label><br />
-              <input name='url' type="text" defaultValue={props.post.linkURL} onKeyUp={handleUpdatedPostUrl} /><br />
-              <input type='submit' />
-              <button onClick={hideModalEdit}>Close</button>
+          <form onSubmit={() => { handleUpdatedPost(props.post) }}>
+            <label htmlFor='user'>Poster Username:</label><br />
+            <input name='user' type="text" defaultValue={props.post.user} onKeyUp={handleUpdatedUser} /><br />
+            <label htmlFor='body'>Post Body:</label><br />
+            <input name='body' type="text" defaultValue={props.post.postBody} onKeyUp={handleUpdatedPostBody} /><br />
+            <label htmlFor='image'>Include an image:</label><br />
+            <input name='image' type="text" defaultValue={props.post.imageURL} onKeyUp={handleUpdatedPostImg} /><br />
+            <label htmlFor='url'>Link to an outside article:</label><br />
+            <input name='url' type="text" defaultValue={props.post.linkURL} onKeyUp={handleUpdatedPostUrl} /><br />
+            <input type='submit' />
+            <button onClick={hideModalEdit}>Close</button>
           </form>
         </div>
-        : null }
+        : null}
 
-      </div>
-    )
+    </div>
+  )
 }
 
 export default PostCard

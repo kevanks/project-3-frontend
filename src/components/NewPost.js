@@ -62,7 +62,7 @@ const NewPost = (props) => {
     return (
         <div className='modal-form'>
             <div className='modal-header'>
-                <span onClick={props.handleHideNewForm} class="material-symbols-outlined">close</span>
+                <span onClick={props.handleHideNewForm} className="material-symbols-outlined">close</span>
             </div>
             <form onSubmit={handlePostSubmit}>
                 <label htmlFor='user'>Poster Username:</label><br />
