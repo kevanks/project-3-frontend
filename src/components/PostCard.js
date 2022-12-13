@@ -39,6 +39,10 @@ const PostCard = (props) => {// need to update with ternaries
 
   const revealModalEdit = () => {
     setShowModalEdit(true)
+    setUpdatedUser(props.post.user)
+    setUpdatedPostBody(props.post.postBody)
+    setUpdatedPostImg(props.post.imageURL)
+    setUpdatedPostUrl(props.post.linkURL)
   }
 
   const hideModalEdit = () => {
@@ -46,7 +50,8 @@ const PostCard = (props) => {// need to update with ternaries
   }
 
   // edit feature
-  const handleUpdatedPost = (postsData) => {
+  const handleUpdatedPost = (event, postsData) => {
+    event.preventDefault()
     axios.put(`https://evening-mesa-52036.herokuapp.com/${postsData._id}`,
       {
         user: updatedUser,
@@ -54,7 +59,11 @@ const PostCard = (props) => {// need to update with ternaries
         imageURL: updatedPostImg,
         linkURL: updatedPostUrl
       }
-      )
+    ).then(() => {
+      props.updatePosts()
+    })
+    setShowModal(false)
+    setShowModalEdit(false)
   }
 
   // delete feature
@@ -89,7 +98,7 @@ const PostCard = (props) => {// need to update with ternaries
         : null }
         {(showModalEdit) ?
         <div id="modal-edit">
-          <form onSubmit={()=> {handleUpdatedPost(props.post)}}>
+          <form onSubmit={(event)=> {handleUpdatedPost(event, props.post)}}>
               <label htmlFor='user'>Poster Username:</label><br />
               <input name='user' type="text" defaultValue={props.post.user} onKeyUp={handleUpdatedUser} /><br />
               <label htmlFor='body'>Post Body:</label><br />

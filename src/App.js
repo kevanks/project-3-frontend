@@ -27,7 +27,7 @@ function App() {
 
   // creates new user and sets account to theirs
   const handleCreateUser = (userObj) => {
-    axios.post('https://evening-mesa-52036.herokuapp.com/createaccount', userObj).then((response) => {
+    axios.post('https://localhost:3000/createaccount', userObj).then((response) => {
       if(response.data.username) {
         console.log(response);
         setCurrentUser(response.data)
@@ -40,7 +40,7 @@ function App() {
   // handles Login of account
   const handleLogin = (userObj) => {
     console.log(userObj);
-    axios.put('https://evening-mesa-52036.herokuapp.com/login', userObj).then((response) => {
+    axios.put('https://localhost:3000/login', userObj).then((response) => {
       if(response.data.username) {
         console.log(response);
         setCurrentUser(response.data)
@@ -113,7 +113,7 @@ function App() {
       <div className='card-container'>
         {allPosts.map((post) => {
           return (
-            <PostCard post={post} setAllPosts={setAllPosts}/>
+            <PostCard post={post} setAllPosts={setAllPosts} updatePosts={updatePosts}/>
           )
         })}
       </div>

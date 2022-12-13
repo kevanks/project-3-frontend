@@ -29,17 +29,19 @@ const Login = (props) => {
         console.log({
             username: username,
             password: password
-        });
+        })
+        props.handleLogin()
+      }
         // need to insert logic here to validate password, check if unique username, etc.
-        axios.post('https://evening-mesa-52036.herokuapp.com/login',
-            {
-                username: username,
-                password: password
-            }).then(() => {// we will need to add the cookie response from the server here
-                props.handleHideLoginForm()
-                props.updatePosts()
-            })
-    }
+    //     axios.post('https://evening-mesa-52036.herokuapp.com/login',
+    //         {
+    //             username: username,
+    //             password: password
+    //         }).then(() => {// we will need to add the cookie response from the server here
+    //             props.handleHideLoginForm()
+    //             props.updatePosts()
+    //         })
+    // }
 
     //////////////////////////////////////
     //Return form for user login
