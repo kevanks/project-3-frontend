@@ -39,36 +39,20 @@ const PostCard = (props) => {// need to update with ternaries
 
   const revealModalEdit = () => {
     setShowModalEdit(true)
+    setUpdatedUser(props.post.user)
+    setUpdatedPostBody(props.post.postBody)
+    setUpdatedPostImg(props.post.imageURL)
+    setUpdatedPostUrl(props.post.linkURL)
   }
 
   const hideModalEdit = () => {
     setShowModalEdit(false)
   }
 
-  // // show and hide card modal
-  // const handleShowCardModal = () => {
-  //   let el = document.getElementById('modal-post')
-  //   el.classList.remove('hidden');
-  // }
-  //
-  // const handleHideCardModal = () => {
-  //   let el = document.getElementById('modal-post')
-  //   el.classList.add('hidden');
-  // }
-  //
-  // // show and hide edit form
-  // const showEdit = () => {
-  //   let la = document.getElementById('modal-edit')
-  //   la.classList.remove('hidden');
-  // }
-  //
-  // const hideEdit = () => {
-  //   let la = document.getElementById('modal-edit')
-  //   la.classList.add('hidden');
-  // }
-
   // edit feature
-  const handleUpdatedPost = (postsData) => {
+  const handleUpdatedPost = (event, postsData) => {
+    event.preventDefault()
+
     axios.put(`https://evening-mesa-52036.herokuapp.com/${postsData._id}`,
       {
         user: updatedUser,
@@ -76,7 +60,11 @@ const PostCard = (props) => {// need to update with ternaries
         imageURL: updatedPostImg,
         linkURL: updatedPostUrl
       }
-      )
+    ).then(() => {
+      props.updatePosts()
+    })
+    setShowModal(false)
+    setShowModalEdit(false)
   }
 
   // delete feature
@@ -90,28 +78,28 @@ const PostCard = (props) => {// need to update with ternaries
   }
 
 
-    return (
-      <div>
-        <div className="card" onClick={revealModal}>
-            <p>Posted by {props.post.user}</p>
-            <p className="post-body">{props.post.postBody}</p>
-            <img src={props.post.imageURL} />
-            <a href={props.post.linkURL}>{props.post.linkURL}</a><br/>
-        </div>
-        {(showModal) ?
+  return (
+    <div>
+      <div className="card" onClick={revealModal}>
+        <p>Posted by {props.post.user}</p>
+        <p className="post-body">{props.post.postBody}</p>
+        <img src={props.post.imageURL} />
+        <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
+      </div>
+      {(showModal) ?
         <div id="modal-post">
-            <p>Posted by {props.post.user}</p>
-            <p className="post-body">{props.post.postBody}</p>
-            <img src={props.post.imageURL} />
-            <a href={props.post.linkURL}>{props.post.linkURL}</a><br/>
-            <button onClick={hideModal}>Close</button>
-            <button onClick={revealModalEdit}>Edit</button>
-            <button onClick={()=>{deletePost(props.post)}}>Delete</button>
+          <p>Posted by {props.post.user}</p>
+          <p className="post-body">{props.post.postBody}</p>
+          <img src={props.post.imageURL} />
+          <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
+          <button onClick={hideModal}>Close</button>
+          <button onClick={revealModalEdit}>Edit</button>
+          <button onClick={() => { deletePost(props.post) }}>Delete</button>
         </div>
-        : null }
-        {(showModalEdit) ?
+        : null}
+      {(showModalEdit) ?
         <div id="modal-edit">
-          <form onSubmit={()=> {handleUpdatedPost(props.post)}}>
+          <form onSubmit={(event)=> {handleUpdatedPost(event, props.post)}}>
               <label htmlFor='user'>Poster Username:</label><br />
               <input name='user' type="text" defaultValue={props.post.user} onKeyUp={handleUpdatedUser} /><br />
               <label htmlFor='body'>Post Body:</label><br />
@@ -124,10 +112,10 @@ const PostCard = (props) => {// need to update with ternaries
               <button onClick={hideModalEdit}>Close</button>
           </form>
         </div>
-        : null }
+        : null}
 
-      </div>
-    )
+    </div>
+  )
 }
 
 export default PostCard
