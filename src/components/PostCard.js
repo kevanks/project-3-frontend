@@ -45,28 +45,6 @@ const PostCard = (props) => {// need to update with ternaries
     setShowModalEdit(false)
   }
 
-  // // show and hide card modal
-  // const handleShowCardModal = () => {
-  //   let el = document.getElementById('modal-post')
-  //   el.classList.remove('hidden');
-  // }
-  //
-  // const handleHideCardModal = () => {
-  //   let el = document.getElementById('modal-post')
-  //   el.classList.add('hidden');
-  // }
-  //
-  // // show and hide edit form
-  // const showEdit = () => {
-  //   let la = document.getElementById('modal-edit')
-  //   la.classList.remove('hidden');
-  // }
-  //
-  // const hideEdit = () => {
-  //   let la = document.getElementById('modal-edit')
-  //   la.classList.add('hidden');
-  // }
-
   // edit feature
   const handleUpdatedPost = (postsData) => {
     axios.put(`https://evening-mesa-52036.herokuapp.com/${postsData._id}`,

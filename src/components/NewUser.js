@@ -35,7 +35,7 @@ const NewUser = (props) => {
             password: newPassword
         });
         // need to insert logic here to validate password, check if unique username, etc.
-        axios.post('https://evening-mesa-52036.herokuapp.com/newuser',
+        axios.post('https://evening-mesa-52036.herokuapp.com/createaccount',
             {
                 username: newUsername,
                 password: newPassword
@@ -43,6 +43,7 @@ const NewUser = (props) => {
                 props.handleHideNewForm()
                 props.updatePosts()
             })
+            props.handleCreateUser()
     }
 
     //////////////////////////////////////

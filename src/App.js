@@ -15,12 +15,47 @@ function App() {
   //useState variables / functions
   //////////////////////////////////////
   const [allPosts, setAllPosts] = useState([]) // allPosts will be used to store all posts visible on the page
+  const [errorMessage, setErrorMessage] = useState('')
+  const [currentUser, setCurrentUser] = useState({})
+
 
   const updatePosts = () => {
     axios.get('https://evening-mesa-52036.herokuapp.com/').then((response) => {
       setAllPosts(response.data)
     })
   }
+
+  // creates new user and sets account to theirs
+  const handleCreateUser = (userObj) => {
+    axios.post('https://evening-mesa-52036.herokuapp.com/createaccount', userObj).then((response) => {
+      if(response.data.username) {
+        console.log(response);
+        setCurrentUser(response.data)
+      } else {
+        setErrorMessage(response.data)
+      }
+    })
+  }
+
+  // handles Login of account
+  const handleLogin = (userObj) => {
+    console.log(userObj);
+    axios.put('https://evening-mesa-52036.herokuapp.com/login', userObj).then((response) => {
+      if(response.data.username) {
+        console.log(response);
+        setCurrentUser(response.data)
+      } else {
+        console.log(response);
+        setErrorMessage(response.data)
+      }
+    })
+  }
+
+  // handles logout of account
+  const handleLogout = () => {
+    setCurrentUser({})
+  }
+
 
   useEffect(() => {
     updatePosts()
@@ -70,10 +105,10 @@ function App() {
         <NewPost updatePosts={updatePosts} handleHideNewForm={handleHideNewForm} />
       </div>
       <div id='new-user-modal' className='modal hidden'>
-        <NewUser handleHideNewUserForm={handleHideNewUserForm} updatePosts={updatePosts} />
+        <NewUser handleHideNewUserForm={handleHideNewUserForm} handleCreateUser={handleCreateUser} updatePosts={updatePosts} />
       </div>
       <div id='login-modal' className='modal hidden'>
-        <Login handleHideLoginForm={handleHideLoginForm} updatePosts={updatePosts} />
+        <Login handleHideLoginForm={handleHideLoginForm} handleLogin={handleLogin} updatePosts={updatePosts} />
       </div>
       <div className='card-container'>
         {allPosts.map((post) => {
