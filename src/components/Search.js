@@ -22,9 +22,10 @@ const Search = (props) => {
 
     const handleSearchSubmit = (event) => {
         event.preventDefault()
-        setSearch('')
         axios.get('https://evening-mesa-52036.herokuapp.com/search/' + search).then((response) => {
-            props.setAllPost(response.data)
+            console.log(response.data);
+            props.setAllPosts(response.data)
+            setSearch('')
         })
     }
 
