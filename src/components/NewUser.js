@@ -34,16 +34,20 @@ const NewUser = (props) => {
             username: newUsername,
             password: newPassword
         });
+        props.handleCreateUser()
+        props.handleHideNewForm()
+      }
         // need to insert logic here to validate password, check if unique username, etc.
-        axios.post('https://evening-mesa-52036.herokuapp.com/newuser',
-            {
-                username: newUsername,
-                password: newPassword
-            }).then(() => {
-                props.handleHideNewForm()
-                props.updatePosts()
-            })
-    }
+    //     axios.post('https://evening-mesa-52036.herokuapp.com/createaccount',
+    //         {
+    //             username: newUsername,
+    //             password: newPassword
+    //         }).then(() => {
+    //             props.handleHideNewForm()
+    //             props.updatePosts()
+    //         })
+    //         props.handleCreateUser()
+    // }
 
     //////////////////////////////////////
     //Return form for new user submit

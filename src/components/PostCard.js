@@ -39,37 +39,20 @@ const PostCard = (props) => {// need to update with ternaries
 
   const revealModalEdit = () => {
     setShowModalEdit(true)
+    setUpdatedUser(props.post.user)
+    setUpdatedPostBody(props.post.postBody)
+    setUpdatedPostImg(props.post.imageURL)
+    setUpdatedPostUrl(props.post.linkURL)
   }
 
   const hideModalEdit = () => {
     setShowModalEdit(false)
   }
 
-  // // show and hide card modal
-  // const handleShowCardModal = () => {
-  //   let el = document.getElementById('modal-post')
-  //   el.classList.remove('hidden');
-  // }
-  //
-  // const handleHideCardModal = () => {
-  //   let el = document.getElementById('modal-post')
-  //   el.classList.add('hidden');
-  // }
-  //
-  // // show and hide edit form
-  // const showEdit = () => {
-  //   let la = document.getElementById('modal-edit')
-  //   la.classList.remove('hidden');
-  // }
-  //
-  // const hideEdit = () => {
-  //   let la = document.getElementById('modal-edit')
-  //   la.classList.add('hidden');
-  // }
-
   // edit feature
-  const handleUpdatedPost = (postsData) => {
-    postsData.preventDefault()
+  const handleUpdatedPost = (event, postsData) => {
+    event.preventDefault()
+
     axios.put(`https://evening-mesa-52036.herokuapp.com/${postsData._id}`,
       {
         user: updatedUser,
@@ -77,7 +60,11 @@ const PostCard = (props) => {// need to update with ternaries
         imageURL: updatedPostImg,
         linkURL: updatedPostUrl
       }
-    )
+    ).then(() => {
+      props.updatePosts()
+    })
+    setShowModal(false)
+    setShowModalEdit(false)
   }
 
   // delete feature
@@ -112,17 +99,17 @@ const PostCard = (props) => {// need to update with ternaries
         : null}
       {(showModalEdit) ?
         <div id="modal-edit">
-          <form onSubmit={() => { handleUpdatedPost(props.post) }}>
-            <label htmlFor='user'>Poster Username:</label><br />
-            <input name='user' type="text" defaultValue={props.post.user} onKeyUp={handleUpdatedUser} /><br />
-            <label htmlFor='body'>Post Body:</label><br />
-            <input name='body' type="text" defaultValue={props.post.postBody} onKeyUp={handleUpdatedPostBody} /><br />
-            <label htmlFor='image'>Include an image:</label><br />
-            <input name='image' type="text" defaultValue={props.post.imageURL} onKeyUp={handleUpdatedPostImg} /><br />
-            <label htmlFor='url'>Link to an outside article:</label><br />
-            <input name='url' type="text" defaultValue={props.post.linkURL} onKeyUp={handleUpdatedPostUrl} /><br />
-            <input type='submit' />
-            <button onClick={hideModalEdit}>Close</button>
+          <form onSubmit={(event)=> {handleUpdatedPost(event, props.post)}}>
+              <label htmlFor='user'>Poster Username:</label><br />
+              <input name='user' type="text" defaultValue={props.post.user} onKeyUp={handleUpdatedUser} /><br />
+              <label htmlFor='body'>Post Body:</label><br />
+              <input name='body' type="text" defaultValue={props.post.postBody} onKeyUp={handleUpdatedPostBody} /><br />
+              <label htmlFor='image'>Include an image:</label><br />
+              <input name='image' type="text" defaultValue={props.post.imageURL} onKeyUp={handleUpdatedPostImg} /><br />
+              <label htmlFor='url'>Link to an outside article:</label><br />
+              <input name='url' type="text" defaultValue={props.post.linkURL} onKeyUp={handleUpdatedPostUrl} /><br />
+              <input type='submit' />
+              <button onClick={hideModalEdit}>Close</button>
           </form>
         </div>
         : null}
