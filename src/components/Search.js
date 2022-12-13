@@ -32,7 +32,7 @@ const Search = (props) => {
         <div className='search-div'>
             <form className='search-form' onSubmit={handleSearchSubmit}>
                 <input type="text" className='search-box' placeholder='Search' onChange={handleSearchInput} />
-                <span className="material-symbols-outlined">search</span>
+                <span className="material-symbols-outlined search-symbol">search</span>
             </form>
         </div>
     )
