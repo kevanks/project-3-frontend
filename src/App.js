@@ -6,6 +6,7 @@ import NewPost from './components/NewPost.js'
 import PostCard from './components/PostCard.js'
 import NewUser from './components/NewUser.js'
 import Login from './components/Login.js'
+import Search from './components/Search.js'
 
 // const seedData = [{ user: "test1user", postBody: "test1 Post Body", imageURL: "https://i.imgur.com/1eXyRRU.jpg", linkURL: "https://imgur.com/1eXyRRU", likes: [], comments: [] }, { user: "newPostUser", postBody: "newPostBody", imageURL: "https://i.imgur.com/1eXyRRU.jpg", linkURL: "https://imgur.com/1eXyRRU", likes: [], comments: [] }]
 
@@ -66,6 +67,9 @@ function App() {
         <button className='button-50' onClick={handleShowNewUserForm}>Sign Up!</button>
         <button className='button-50' onClick={handleShowLoginForm}>Log In</button>
       </div>
+      <div>
+        <Search setAllPosts={setAllPosts} />
+      </div>
       <div id='new-post-modal' className='modal hidden'>
         <NewPost updatePosts={updatePosts} handleHideNewForm={handleHideNewForm} />
       </div>
@@ -78,7 +82,7 @@ function App() {
       <div className='card-container'>
         {allPosts.map((post) => {
           return (
-            <PostCard post={post} setAllPosts={setAllPosts}/>
+            <PostCard post={post} setAllPosts={setAllPosts} />
           )
         })}
       </div>

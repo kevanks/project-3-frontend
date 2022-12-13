@@ -75,7 +75,8 @@ img {
     /* Could be more or less, depending on screen size */
 }
 
-#modal-post, #modal-edit {
+#modal-post,
+#modal-edit {
     background-color: #fefefe;
     margin: 5% auto;
     /* 15% from the top and centered */
@@ -150,4 +151,20 @@ img {
     .button-50 {
         padding: 12px 50px;
     }
+}
+
+/* https://copy-paste-css.com/form-input-text */
+.search-box {
+    width: 80%;
+    max-width: 500px;
+    height: 36px;
+    border-radius: 4px;
+    padding-left: 12px;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid rgb(137, 151, 155);
+    outline: none;
+    color: rgb(33, 49, 60);
+    background-color: rgb(255, 255, 255);
+    padding-right: 12px;
 }
