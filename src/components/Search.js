@@ -29,8 +29,8 @@ const Search = (props) => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSearchSubmit}>
+        <div className='search-div'>
+            <form className='search-form' onSubmit={handleSearchSubmit}>
                 <input type="text" className='search-box' placeholder='Search' onChange={handleSearchInput} />
                 <span className="material-symbols-outlined">search</span>
             </form>
