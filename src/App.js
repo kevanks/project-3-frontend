@@ -30,9 +30,9 @@ function App() {
 
   // creates new user and sets account to theirs
   const handleCreateUser = (userObj) => {
-    axios.post('https://localhost:3000/createaccount', userObj).then((response) => {
-      if (response.data.username) {
-        console.log(response);
+    axios.post('https://evening-mesa-52036.herokuapp.com/createaccount', userObj).then((response) => {
+      if(response.data.username) {
+        console.log(response + 'this is response');
         setCurrentUser(response.data)
       } else {
         setErrorMessage(response.data)
@@ -43,12 +43,12 @@ function App() {
   // handles Login of account
   const handleLogin = (userObj) => {
     console.log(userObj);
-    axios.put('https://localhost:3000/login', userObj).then((response) => {
-      if (response.data.username) {
-        console.log(response);
-        setCurrentUser(response.data)
+    axios.put('https://evening-mesa-52036.herokuapp.com/login', userObj).then((response) => {
+      if(response.data.username) {
+        console.log(response.data + "this is username");
+        setCurrentUser(userObj.username)
       } else {
-        console.log(response);
+        console.log(response + "other");
         setErrorMessage(response.data)
       }
     })
@@ -100,6 +100,10 @@ function App() {
     < main >
       <h1>Message Board</h1>
       <Communities setAllPosts={setAllPosts} setCurrentCommunity={setCurrentCommunity} />
+      <div>
+        <h4>Logged in as: {currentUser.username} </h4>
+        <button className='button-50' onClick={handleLogout}>Logout</button>
+      </div>
       <div className='button-container'>
         <button className='button-50' onClick={handleShowNewForm}>New Post</button>
         <button className='button-50' onClick={handleShowNewUserForm}>Sign Up!</button>
@@ -115,12 +119,12 @@ function App() {
         <NewUser handleHideNewUserForm={handleHideNewUserForm} handleCreateUser={handleCreateUser} updatePosts={updatePosts} />
       </div>
       <div id='login-modal' className='modal hidden'>
-        <Login handleHideLoginForm={handleHideLoginForm} handleLogin={handleLogin} updatePosts={updatePosts} />
+        <Login handleHideLoginForm={handleHideLoginForm} handleLogin={handleLogin} updatePosts={updatePosts} currentUser={currentUser} />
       </div>
       <div className='card-container'>
         {allPosts.map((post) => {
           return (
-            <PostCard post={post} setAllPosts={setAllPosts} updatePosts={updatePosts} />
+          <PostCard post={post} setAllPosts={setAllPosts} updatePosts={updatePosts} currentUser={currentUser}/>
 
           )
         })}
