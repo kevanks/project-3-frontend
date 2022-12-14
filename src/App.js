@@ -7,6 +7,7 @@ import PostCard from './components/PostCard.js'
 import NewUser from './components/NewUser.js'
 import Login from './components/Login.js'
 import Search from './components/Search.js'
+import Communities from './components/Communities.js'
 
 // const seedData = [{ user: "test1user", postBody: "test1 Post Body", imageURL: "https://i.imgur.com/1eXyRRU.jpg", linkURL: "https://imgur.com/1eXyRRU", likes: [], comments: [] }, { user: "newPostUser", postBody: "newPostBody", imageURL: "https://i.imgur.com/1eXyRRU.jpg", linkURL: "https://imgur.com/1eXyRRU", likes: [], comments: [] }]
 
@@ -29,7 +30,7 @@ function App() {
   // creates new user and sets account to theirs
   const handleCreateUser = (userObj) => {
     axios.post('https://localhost:3000/createaccount', userObj).then((response) => {
-      if(response.data.username) {
+      if (response.data.username) {
         console.log(response);
         setCurrentUser(response.data)
       } else {
@@ -42,7 +43,7 @@ function App() {
   const handleLogin = (userObj) => {
     console.log(userObj);
     axios.put('https://localhost:3000/login', userObj).then((response) => {
-      if(response.data.username) {
+      if (response.data.username) {
         console.log(response);
         setCurrentUser(response.data)
       } else {
@@ -97,6 +98,9 @@ function App() {
 
     < main >
       <h1>Message Board</h1>
+      <div>
+        <Communities setAllPosts={setAllPosts} />
+      </div>
       <div className='button-container'>
         <button className='button-50' onClick={handleShowNewForm}>New Post</button>
         <button className='button-50' onClick={handleShowNewUserForm}>Sign Up!</button>
@@ -117,7 +121,7 @@ function App() {
       <div className='card-container'>
         {allPosts.map((post) => {
           return (
-            <PostCard post={post} setAllPosts={setAllPosts} updatePosts={updatePosts}/>
+            <PostCard post={post} setAllPosts={setAllPosts} updatePosts={updatePosts} />
 
           )
         })}
