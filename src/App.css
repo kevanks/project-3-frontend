@@ -180,3 +180,19 @@ img {
     font-size: 36px;
     vertical-align: middle;
 }
+
+.communities-title-container {
+    display: flex;
+}
+
+.community-li {
+    cursor: default;
+}
+
+.community-li:hover {
+    color: blue;
+}
+
+ul {
+    list-style: none;
+}
