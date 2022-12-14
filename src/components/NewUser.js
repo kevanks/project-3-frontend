@@ -9,6 +9,7 @@ const NewUser = (props) => {
     const [newUsername, setNewUsername] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [passwordNoMatch, setPasswordNoMatch] = useState(false)
 
     //////////////////////////////////////
     //Event Handlers
@@ -30,24 +31,19 @@ const NewUser = (props) => {
 
     const handleNewUserSubmit = (event) => {
         event.preventDefault()
-        console.log({// testing until endpoint is available
-            username: newUsername,
-            password: newPassword
-        });
-        props.handleCreateUser()
-        props.handleHideNewForm()
+        setPasswordNoMatch(false)
+        let userObj = {
+          username: newUsername,
+          password: newPassword
+        }
+        if (newPassword === confirmPassword) {
+          props.handleCreateUser(userObj)
+          props.handleHideNewUserForm()
+        } else {
+          console.log('passwords dont match');
+          setPasswordNoMatch(true)
+        }
       }
-        // need to insert logic here to validate password, check if unique username, etc.
-    //     axios.post('https://evening-mesa-52036.herokuapp.com/createaccount',
-    //         {
-    //             username: newUsername,
-    //             password: newPassword
-    //         }).then(() => {
-    //             props.handleHideNewForm()
-    //             props.updatePosts()
-    //         })
-    //         props.handleCreateUser()
-    // }
 
     //////////////////////////////////////
     //Return form for new user submit
@@ -58,6 +54,7 @@ const NewUser = (props) => {
             <div className='modal-header'>
                 <button onClick={props.handleHideNewUserForm} className='close-button'>Cancel</button>
             </div>
+            <div>
             <form onSubmit={handleNewUserSubmit}>
                 <label htmlFor='username'>Username:</label><br />
                 <input name='username' type="text" onChange={handleUsername} /><br />
@@ -67,6 +64,12 @@ const NewUser = (props) => {
                 <input name='confirm-password' type="password" onChange={handleConfirmPassword} /><br />
                 <input type='submit' />
             </form>
+            </div>
+            {(passwordNoMatch) ?
+            <div>
+              <p>Passwords Do Not Match. Please Try Again</p>
+            </div>
+            : null }
         </div>
     )
 

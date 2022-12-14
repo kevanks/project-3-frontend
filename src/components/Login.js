@@ -26,22 +26,17 @@ const Login = (props) => {
 
     const handleLoginSubmit = (event) => {
         event.preventDefault()
-        console.log({
-            username: username,
-            password: password
-        })
-        props.handleLogin()
-      }
-        // need to insert logic here to validate password, check if unique username, etc.
-    //     axios.post('https://evening-mesa-52036.herokuapp.com/login',
-    //         {
-    //             username: username,
-    //             password: password
-    //         }).then(() => {// we will need to add the cookie response from the server here
-    //             props.handleHideLoginForm()
-    //             props.updatePosts()
-    //         })
-    // }
+        let userObj = {
+          username: username,
+          password: password
+        }
+        if (password === userObj.password) {
+          props.handleHideLoginForm()
+          props.handleLogin(userObj)
+        } else {
+          console.log('passwords dont match');
+        }
+    }
 
     //////////////////////////////////////
     //Return form for user login
