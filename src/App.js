@@ -43,10 +43,10 @@ function App() {
     console.log(userObj);
     axios.put('https://evening-mesa-52036.herokuapp.com/login', userObj).then((response) => {
       if(response.data.username) {
-        console.log(response);
-        setCurrentUser(response.data.username)
+        console.log(response.data + "this is username");
+        setCurrentUser(userObj.username)
       } else {
-        console.log(response);
+        console.log(response + "other");
         setErrorMessage(response.data)
       }
     })
@@ -121,7 +121,7 @@ function App() {
       <div className='card-container'>
         {allPosts.map((post) => {
           return (
-            <PostCard post={post} setAllPosts={setAllPosts} updatePosts={updatePosts}/>
+          <PostCard post={post} setAllPosts={setAllPosts} updatePosts={updatePosts} currentUser={currentUser}/>
 
           )
         })}

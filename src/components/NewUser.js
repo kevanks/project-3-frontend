@@ -9,6 +9,7 @@ const NewUser = (props) => {
     const [newUsername, setNewUsername] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [passwordNoMatch, setPasswordNoMatch] = useState(false)
 
     //////////////////////////////////////
     //Event Handlers
@@ -30,6 +31,7 @@ const NewUser = (props) => {
 
     const handleNewUserSubmit = (event) => {
         event.preventDefault()
+        setPasswordNoMatch(false)
         let userObj = {
           username: newUsername,
           password: newPassword
@@ -39,6 +41,7 @@ const NewUser = (props) => {
           props.handleHideNewUserForm()
         } else {
           console.log('passwords dont match');
+          setPasswordNoMatch(true)
         }
       }
 
@@ -51,6 +54,7 @@ const NewUser = (props) => {
             <div className='modal-header'>
                 <button onClick={props.handleHideNewUserForm} className='close-button'>Cancel</button>
             </div>
+            <div>
             <form onSubmit={handleNewUserSubmit}>
                 <label htmlFor='username'>Username:</label><br />
                 <input name='username' type="text" onChange={handleUsername} /><br />
@@ -60,6 +64,12 @@ const NewUser = (props) => {
                 <input name='confirm-password' type="password" onChange={handleConfirmPassword} /><br />
                 <input type='submit' />
             </form>
+            </div>
+            {(passwordNoMatch) ?
+            <div>
+              <p>Passwords Do Not Match. Please Try Again</p>
+            </div>
+            : null }
         </div>
     )
 
