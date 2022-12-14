@@ -7,7 +7,7 @@ import PostCard from './components/PostCard.js'
 import NewUser from './components/NewUser.js'
 import Login from './components/Login.js'
 import Search from './components/Search.js'
-import Communities from './components/Communities.js'
+import Communities from './components/Communities.js' // this component is inside its own DIV
 
 // const seedData = [{ user: "test1user", postBody: "test1 Post Body", imageURL: "https://i.imgur.com/1eXyRRU.jpg", linkURL: "https://imgur.com/1eXyRRU", likes: [], comments: [] }, { user: "newPostUser", postBody: "newPostBody", imageURL: "https://i.imgur.com/1eXyRRU.jpg", linkURL: "https://imgur.com/1eXyRRU", likes: [], comments: [] }]
 
@@ -19,6 +19,7 @@ function App() {
   const [allPosts, setAllPosts] = useState([]) // allPosts will be used to store all posts visible on the page
   const [errorMessage, setErrorMessage] = useState('')
   const [currentUser, setCurrentUser] = useState({})
+  const [currentCommunity, setCurrentCommunity] = useState('')
 
 
   const updatePosts = () => {
@@ -98,9 +99,7 @@ function App() {
 
     < main >
       <h1>Message Board</h1>
-      <div>
-        <Communities setAllPosts={setAllPosts} />
-      </div>
+      <Communities setAllPosts={setAllPosts} setCurrentCommunity={setCurrentCommunity} />
       <div className='button-container'>
         <button className='button-50' onClick={handleShowNewForm}>New Post</button>
         <button className='button-50' onClick={handleShowNewUserForm}>Sign Up!</button>

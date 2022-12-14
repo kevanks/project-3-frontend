@@ -15,10 +15,19 @@ const Communities = (props) => {
     }
 
     const updateCommunityPosts = (event, community) => {
-        console.log(community);
+        props.setCurrentCommunity(community)
         axios.get('http://localhost:3000/community/' + community).then((response) => {
             props.setAllPosts(response.data)
         })
+    }
+
+    const handleShowCommunities = () => {
+        let el = document.getElementById('communities-list')
+        if ([...el.classList].includes('hidden')) {
+            el.classList.remove('hidden');
+        } else {
+            el.classList.add('hidden');
+        }
     }
 
     useEffect(() => {
@@ -27,10 +36,13 @@ const Communities = (props) => {
 
     return (
         <div>
-            <ul>
+            <div className="communities-title-container" onClick={handleShowCommunities}>
+                <p className="community-title">Communities</p><span class="material-symbols-outlined">menu</span>
+            </div>
+            <ul id="communities-list" className="hidden">
                 {communityArray.map((community) => {
                     return (
-                        <li onClick={(event) => { updateCommunityPosts(event, community) }}>{community}</li>
+                        <li className="community-li" onClick={(event) => { updateCommunityPosts(event, community) }}>{community}</li>
                     )
                 })}
             </ul>
