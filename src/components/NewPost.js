@@ -34,9 +34,9 @@ const NewPost = (props) => {
 
     const handlePostSubmit = (event) => {
         event.preventDefault()
-        axios.post('https://evening-mesa-52036.herokuapp.com/',//heroku deployed API url goes here
+        axios.post('https://evening-mesa-52036.herokuapp.com/',
             {
-                user: newPostUser,
+                user: props.currentUser.username,
                 postBody: newPostBody,
                 imageURL: newPostImage,
                 linkURL: newPostURL,
@@ -65,8 +65,8 @@ const NewPost = (props) => {
                 <span onClick={props.handleHideNewForm} className="material-symbols-outlined">close</span>
             </div>
             <form onSubmit={handlePostSubmit}>
-                <label htmlFor='user'>Poster Username:</label><br />
-                <input name='user' type="text" onChange={handleUser} /><br />
+                {/* <label htmlFor='user'>Poster Username:</label><br />
+                <input name='user' type="text" onChange={handleUser} /><br /> */}
                 <label htmlFor='body'>Post Body:</label><br />
                 <input name='body' type="text" onChange={handleBody} /><br />
                 <label htmlFor='image'>Include an image:</label><br />

@@ -9,14 +9,14 @@ const Communities = (props) => {
     const [communityArray, setCommunityArray] = useState([])
 
     const updateCommunityList = () => {
-        axios.get('http://localhost:3000/community-list').then((response) => {
+        axios.get('https://evening-mesa-52036.herokuapp.com/community-list').then((response) => {
             setCommunityArray(response.data)
         })
     }
 
     const updateCommunityPosts = (event, community) => {
         props.setCurrentCommunity(community)
-        axios.get('http://localhost:3000/community/' + community).then((response) => {
+        axios.get('https://evening-mesa-52036.herokuapp.com/community/' + community).then((response) => {
             props.setAllPosts(response.data)
         })
     }
