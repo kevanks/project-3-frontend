@@ -9,14 +9,14 @@ const Communities = (props) => {
     const [communityArray, setCommunityArray] = useState([])
 
     const updateCommunityList = () => {
-        axios.get('https://evening-mesa-52036.herokuapp.com/community-list').then((response) => {
+        axios.get('http://localhost:3000/community-list').then((response) => {
             setCommunityArray(response.data)
         })
     }
 
     const updateCommunityPosts = (event, community) => {
         props.setCurrentCommunity(community)
-        axios.get('https://evening-mesa-52036.herokuapp.com/community/' + community).then((response) => {
+        axios.get('http://localhost:3000/community/' + community).then((response) => {
             props.setAllPosts(response.data)
         })
     }
@@ -37,7 +37,7 @@ const Communities = (props) => {
     return (
         <div>
             <div className="communities-title-container" onClick={handleShowCommunities}>
-                <p className="community-title">Communities</p><span class="material-symbols-outlined">menu</span>
+                <p className="community-title">Communities</p><span className="material-symbols-outlined">menu</span>
             </div>
             <ul id="communities-list" className="hidden">
                 {communityArray.map((community) => {

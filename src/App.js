@@ -100,14 +100,14 @@ function App() {
     < main >
       <h1>Message Board</h1>
       <Communities setAllPosts={setAllPosts} setCurrentCommunity={setCurrentCommunity} />
-      <div>
-        <h4>Logged in as: {currentUser.username} </h4>
-        <button className='button-50' onClick={handleLogout}>Logout</button>
-      </div>
       <div className='button-container'>
-        <button className='button-50' onClick={handleShowNewForm}>New Post</button>
-        <button className='button-50' onClick={handleShowNewUserForm}>Sign Up!</button>
-        <button className='button-50' onClick={handleShowLoginForm}>Log In</button>
+        {(currentUser.username) ? <div>
+          <h4>Logged in as: {currentUser.username} </h4>
+          <button className='button-50' onClick={handleLogout}>Logout</button>
+        </div> : null}
+        {(currentUser.username) ? <button className='button-50' onClick={handleShowNewForm}>New Post</button> : null}
+        {(currentUser.username) ? null : <button className='button-50' onClick={handleShowNewUserForm}>Sign Up!</button>}
+        {(currentUser.username) ? null : <button className='button-50' onClick={handleShowLoginForm}>Log In</button>}
       </div>
       <div>
         <Search setAllPosts={setAllPosts} />
