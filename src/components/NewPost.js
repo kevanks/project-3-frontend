@@ -10,6 +10,7 @@ const NewPost = (props) => {
     const [newPostBody, setNewPostBody] = useState('') // 
     const [newPostImage, setNewPostImage] = useState('') // 
     const [newPostURL, setNewPostURL] = useState('') // 
+    const [newPostCommunity, setNewPostCommunity] = useState('General')
 
     //////////////////////////////////////
     //Event Handlers
@@ -27,6 +28,9 @@ const NewPost = (props) => {
     const handleURL = (event) => {
         setNewPostURL(event.target.value)
     }
+    const handleCommunity = (event) => {
+        setNewPostCommunity(event.target.value)
+    }
 
     //////////////////////////////////////
     //Axios request for form submit
@@ -34,25 +38,26 @@ const NewPost = (props) => {
 
     const handlePostSubmit = (event) => {
         event.preventDefault()
-        axios.post('https://evening-mesa-52036.herokuapp.com/',
+        axios.post('http://localhost:3000/',
             {
                 user: props.currentUser.username,
                 postBody: newPostBody,
                 imageURL: newPostImage,
                 linkURL: newPostURL,
                 likes: [],
-                comments: []
-            }).catch((err) => {
-                console.log(newPostUser);
-                console.log(err);
-            })
-            .then(() => {
+                comments: [],
+                community: newPostCommunity
+            }).then(() => {
                 setNewPostBody('')
                 setNewPostImage('')
                 setNewPostURL('')
                 setNewPostUser('')
+                setNewPostCommunity('General')
                 props.handleHideNewForm()
                 props.updatePosts()
+            }).catch((err) => {
+                console.log(newPostUser);
+                console.log(err);
             })
     }
 
@@ -65,14 +70,22 @@ const NewPost = (props) => {
                 <span onClick={props.handleHideNewForm} className="material-symbols-outlined">close</span>
             </div>
             <form onSubmit={handlePostSubmit}>
-                {/* <label htmlFor='user'>Poster Username:</label><br />
-                <input name='user' type="text" onChange={handleUser} /><br /> */}
+                <label htmlFor='community'>Community</label><br />
+                <select name='community' onChange={handleCommunity}>
+                    <option value="General">General</option>
+                    <option value="Animals">Animals</option>
+                    <option value="Art">Art</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="News">News</option>
+                    <option value="Science">Science</option>
+                </select><br />
                 <label htmlFor='body'>Post Body:</label><br />
-                <input name='body' type="text" onChange={handleBody} /><br />
+                <input name='body' type="text" value={newPostBody} onChange={handleBody} /><br />
                 <label htmlFor='image'>Include an image:</label><br />
-                <input name='image' type="text" onChange={handleImage} /><br />
+                <input name='image' type="text" value={newPostImage} onChange={handleImage} /><br />
                 <label htmlFor='url'>Link to an outside article:</label><br />
-                <input name='url' type="text" onChange={handleURL} /><br />
+                <input name='url' type="text" value={newPostURL} onChange={handleURL} /><br />
                 <input type='submit' />
             </form>
         </div >
