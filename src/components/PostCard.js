@@ -14,6 +14,9 @@ const PostCard = (props) => {// need to update with ternaries
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [likes, setLikes] = useState([])
   const [numLikes, setNumLikes] = useState(0)
+  const [showAddComment, setShowAddComment] = useState(false)
+  const [comment, setComment] = useState('')
+  const [allComments, setAllComments] = useState([])
 
   const handleUpdatedUser = (event) => {
     setUpdatedUser(event.target.value)
@@ -79,23 +82,45 @@ const PostCard = (props) => {// need to update with ternaries
     setShowModal(false)
   }
 
-  const addLike = () => {
-    if (props.currentUser.username === undefined ) {
+  const addLike = (event, postsData) => {
+    if (props.currentUser.username === undefined) {
       console.log("login to like");
     } else {
-      if (props.post.likes.includes(props.currentUser.username) ) {
+      if (likes.includes(props.currentUser.username) ) {
         console.log("already liked");
       } else {
-        props.post.likes.push(props.currentUser.username)
+        likes.push(props.currentUser.username)
         setNumLikes(numLikes + 1)
+        axios.put(`https://evening-mesa-52036.herokuapp.com/${postsData._id}`,
+          {
+            likes: likes
+          }
+        ).then(() => {
+          props.updatePosts()
+        })
         console.log("like");
-        console.log(props.post.likes);
+        console.log(likes);
       }
     }
   }
 
   const addComment = () => {
-    
+    setShowAddComment(true)
+  }
+
+  const handleComment = (event) => {
+    setComment(event.target.value)
+  }
+
+  const addCommentToFeed = (event) => {
+    event.preventDefault()
+    if (props.currentUser.username === undefined) {
+      console.log("login to comment");
+    } else {
+      allComments.push({user:props.currentUser.username, comment:comment})
+      console.log(allComments);
+    }
+    setShowAddComment(false)
   }
 
 
@@ -119,7 +144,23 @@ const PostCard = (props) => {// need to update with ternaries
           <button onClick={revealModalEdit}>Edit</button>
           <button onClick={() => { deletePost(props.post) }}>Delete</button>
           <h4>Comments</h4>
-          <button onClick={addComment}>Comment</button>
+          {allComments.map((allComments) => {
+            return (
+              <div>
+                <p>{allComments.user}: {allComments.comment}</p>
+              </div>
+            )
+          })}
+          <button onClick={addComment}>Add Comment</button>
+          {(showAddComment) ?
+          <div>
+            <form onSubmit={addCommentToFeed}>
+              <label>Comment:</label><br/>
+              <input name='comment' type='text' onChange={handleComment}/><br/>
+              <input type='submit' value='Submit Comment'/>
+            </form>
+          </div>
+          : null }
         </div>
         : null}
       {(showModalEdit) ?
