@@ -81,7 +81,7 @@ const PostCard = (props) => {// need to update with ternaries
   return (
     <div>
       <div className="card" onClick={revealModal}>
-        <p>Posted by {props.post.user}</p>
+        <p>Posted by {props.post.user} in {props.post.community}</p>
         <p className="post-body">{props.post.postBody}</p>
         <img src={props.post.imageURL} />
         <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
@@ -99,17 +99,17 @@ const PostCard = (props) => {// need to update with ternaries
         : null}
       {(showModalEdit) ?
         <div id="modal-edit">
-          <form onSubmit={(event)=> {handleUpdatedPost(event, props.post)}}>
-              <label htmlFor='user'>Poster Username:</label><br />
-              <input name='user' type="text" defaultValue={props.post.user} onKeyUp={handleUpdatedUser} /><br />
-              <label htmlFor='body'>Post Body:</label><br />
-              <input name='body' type="text" defaultValue={props.post.postBody} onKeyUp={handleUpdatedPostBody} /><br />
-              <label htmlFor='image'>Include an image:</label><br />
-              <input name='image' type="text" defaultValue={props.post.imageURL} onKeyUp={handleUpdatedPostImg} /><br />
-              <label htmlFor='url'>Link to an outside article:</label><br />
-              <input name='url' type="text" defaultValue={props.post.linkURL} onKeyUp={handleUpdatedPostUrl} /><br />
-              <input type='submit' />
-              <button onClick={hideModalEdit}>Close</button>
+          <form onSubmit={(event) => { handleUpdatedPost(event, props.post) }}>
+            <label htmlFor='user'>Poster Username:</label><br />
+            <input name='user' type="text" defaultValue={props.post.user} onKeyUp={handleUpdatedUser} /><br />
+            <label htmlFor='body'>Post Body:</label><br />
+            <input name='body' type="text" defaultValue={props.post.postBody} onKeyUp={handleUpdatedPostBody} /><br />
+            <label htmlFor='image'>Include an image:</label><br />
+            <input name='image' type="text" defaultValue={props.post.imageURL} onKeyUp={handleUpdatedPostImg} /><br />
+            <label htmlFor='url'>Link to an outside article:</label><br />
+            <input name='url' type="text" defaultValue={props.post.linkURL} onKeyUp={handleUpdatedPostUrl} /><br />
+            <input type='submit' />
+            <button onClick={hideModalEdit}>Close</button>
           </form>
         </div>
         : null}
