@@ -12,6 +12,8 @@ const PostCard = (props) => {// need to update with ternaries
   const [updatedPostUrl, setUpdatedPostUrl] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [showModalEdit, setShowModalEdit] = useState(false)
+  const [likes, setLikes] = useState([])
+  const [numLikes, setNumLikes] = useState(0)
 
   const handleUpdatedUser = (event) => {
     setUpdatedUser(event.target.value)
@@ -77,6 +79,25 @@ const PostCard = (props) => {// need to update with ternaries
     setShowModal(false)
   }
 
+  const addLike = () => {
+    if (props.currentUser.username === undefined ) {
+      console.log("login to like");
+    } else {
+      if (props.post.likes.includes(props.currentUser.username) ) {
+        console.log("already liked");
+      } else {
+        props.post.likes.push(props.currentUser.username)
+        setNumLikes(numLikes + 1)
+        console.log("like");
+        console.log(props.post.likes);
+      }
+    }
+  }
+
+  const addComment = () => {
+    
+  }
+
 
   return (
     <div>
@@ -85,6 +106,8 @@ const PostCard = (props) => {// need to update with ternaries
         <p className="post-body">{props.post.postBody}</p>
         <img src={props.post.imageURL} />
         <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
+        <p>Likes: {numLikes}</p>
+        <button className="like-button" onClick={addLike}>Like</button>
       </div>
       {(showModal) ?
         <div id="modal-post">
@@ -95,6 +118,8 @@ const PostCard = (props) => {// need to update with ternaries
           <button onClick={hideModal}>Close</button>
           <button onClick={revealModalEdit}>Edit</button>
           <button onClick={() => { deletePost(props.post) }}>Delete</button>
+          <h4>Comments</h4>
+          <button onClick={addComment}>Comment</button>
         </div>
         : null}
       {(showModalEdit) ?
