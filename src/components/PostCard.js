@@ -149,9 +149,9 @@ const PostCard = (props) => {// need to update with ternaries
           <p className="post-body">{props.post.postBody}</p>
           <img src={props.post.imageURL} />
           <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
-          <button onClick={hideModal}>Close</button>
-          <button onClick={revealModalEdit}>Edit</button>
-          <button onClick={() => { deletePost(props.post) }}>Delete</button>
+          <button className="close-button" onClick={hideModal}>Close</button>
+          <button className="edit-button" onClick={revealModalEdit}>Edit</button>
+          <button className="delete-button" onClick={() => { deletePost(props.post) }}>Delete</button>
           <h4>Comments</h4>
           {props.post.comments.map((comment) => {
             return (
@@ -160,13 +160,13 @@ const PostCard = (props) => {// need to update with ternaries
               </div>
             )
           })}
-          <button onClick={addComment}>Add Comment</button>
+          <button className="submit-button" onClick={addComment}>Add Comment</button>
           {(showAddComment) ?
             <div>
               <form onSubmit={addCommentToFeed}>
                 <label>Comment:</label><br />
                 <input name='comment' type='text' onChange={handleComment} /><br />
-                <input type='submit' value='Submit Comment' />
+                <input className="submit-button" type='submit' value='Submit Comment' />
               </form>
             </div>
             : null}
@@ -183,8 +183,8 @@ const PostCard = (props) => {// need to update with ternaries
             <input name='image' type="text" defaultValue={props.post.imageURL} onKeyUp={handleUpdatedPostImg} /><br />
             <label htmlFor='url'>Link to an outside article:</label><br />
             <input name='url' type="text" defaultValue={props.post.linkURL} onKeyUp={handleUpdatedPostUrl} /><br />
-            <input type='submit' />
-            <button onClick={hideModalEdit}>Close</button>
+            <input className="submit-button" type='submit' />
+            <button className="close-button" onClick={hideModalEdit}>Close</button>
           </form>
         </div>
         : null}
