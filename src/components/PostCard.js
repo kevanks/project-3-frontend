@@ -13,7 +13,7 @@ const PostCard = (props) => {// need to update with ternaries
   const [showModal, setShowModal] = useState(false)
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [likes, setLikes] = useState([])
-  const [numLikes, setNumLikes] = useState(0)
+  // const [numLikes, setNumLikes] = useState(0)
   const [showAddComment, setShowAddComment] = useState(false)
   const [comment, setComment] = useState('')
   const [allComments, setAllComments] = useState([])
@@ -83,14 +83,16 @@ const PostCard = (props) => {// need to update with ternaries
   }
 
   const addLike = (event, postsData) => {
+    setLikes(props.post.likes)
+    console.log(props.post.likes);
     if (props.currentUser.username === undefined) {
       console.log("login to like");
     } else {
-      if (likes.includes(props.currentUser.username) ) {
+      if (likes.includes(props.currentUser.username)) {
         console.log("already liked");
       } else {
         likes.push(props.currentUser.username)
-        setNumLikes(numLikes + 1)
+        // setNumLikes(numLikes + 1)
         axios.put(`https://evening-mesa-52036.herokuapp.com/${postsData._id}`,
           {
             likes: likes
@@ -113,12 +115,19 @@ const PostCard = (props) => {// need to update with ternaries
   }
 
   const addCommentToFeed = (event) => {
+    setAllComments(props.post.comments)
     event.preventDefault()
     if (props.currentUser.username === undefined) {
       console.log("login to comment");
     } else {
-      allComments.push({user:props.currentUser.username, comment:comment})
-      console.log(allComments);
+      allComments.push({ user: props.currentUser.username, comment: comment })
+      axios.put(`https://evening-mesa-52036.herokuapp.com/${props.post._id}`,
+        {
+          comments: allComments
+        }
+      ).then(() => {
+        props.updatePosts()
+      })
     }
     setShowAddComment(false)
   }
@@ -131,8 +140,8 @@ const PostCard = (props) => {// need to update with ternaries
         <p className="post-body">{props.post.postBody}</p>
         <img src={props.post.imageURL} />
         <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
-        <p>Likes: {numLikes}</p>
-        <button className="like-button" onClick={addLike}>Like</button>
+        <p>Likes: {props.post.likes.length}</p>
+        <button className="like-button" onClick={(e) => addLike(e, props.post)}>Like</button>
       </div>
       {(showModal) ?
         <div id="modal-post">
@@ -144,23 +153,23 @@ const PostCard = (props) => {// need to update with ternaries
           <button onClick={revealModalEdit}>Edit</button>
           <button onClick={() => { deletePost(props.post) }}>Delete</button>
           <h4>Comments</h4>
-          {allComments.map((allComments) => {
+          {props.post.comments.map((comment) => {
             return (
               <div>
-                <p>{allComments.user}: {allComments.comment}</p>
+                <p>{comment.user}: {comment.comment}</p>
               </div>
             )
           })}
           <button onClick={addComment}>Add Comment</button>
           {(showAddComment) ?
-          <div>
-            <form onSubmit={addCommentToFeed}>
-              <label>Comment:</label><br/>
-              <input name='comment' type='text' onChange={handleComment}/><br/>
-              <input type='submit' value='Submit Comment'/>
-            </form>
-          </div>
-          : null }
+            <div>
+              <form onSubmit={addCommentToFeed}>
+                <label>Comment:</label><br />
+                <input name='comment' type='text' onChange={handleComment} /><br />
+                <input type='submit' value='Submit Comment' />
+              </form>
+            </div>
+            : null}
         </div>
         : null}
       {(showModalEdit) ?
