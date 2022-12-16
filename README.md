@@ -22,3 +22,6 @@ Another challenge was to figure out how to push the "likes" and "comments" to th
 
 ## Teamwork
 A major goal of this project was to learn how to collaborate with a teammate via Git. Kevin and Greg worked together, with a team huddle every morning to merge the previous day's work, and discuss that days's objectives. Trello was used to track tasks and their status, and to ensure no work was duplicated.
+
+## Issues
+The site works as expected, but the comment system is unfortunately buggy, and works intermittently. There wasn't enough time to troubleshoot and update with a working version before the project was due.
