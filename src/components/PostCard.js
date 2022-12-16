@@ -144,14 +144,16 @@ const PostCard = (props) => {// need to update with ternaries
         <button className="like-button" onClick={(e) => addLike(e, props.post)}>Like</button>
       </div>
       {(showModal) ?
-        <div id="modal-post">
+        <div id="modal-form">
           <p>Posted by {props.post.user}</p>
           <p className="post-body">{props.post.postBody}</p>
           <img src={props.post.imageURL} />
           <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
-          <button className="close-button" onClick={hideModal}>Close</button>
-          <button className="edit-button" onClick={revealModalEdit}>Edit</button>
-          <button className="delete-button" onClick={() => { deletePost(props.post) }}>Delete</button>
+          <div className="buttons">
+            <button className="close-button" onClick={hideModal}>Close</button>
+            <button className="edit-button" onClick={revealModalEdit}>Edit</button>
+            <button className="delete-button" onClick={() => { deletePost(props.post) }}>Delete</button>
+          </div>
           <h4>Comments</h4>
           {props.post.comments.map((comment) => {
             return (
