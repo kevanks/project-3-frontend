@@ -6,10 +6,10 @@ const NewPost = (props) => {
     //useState variables / functions
     //////////////////////////////////////
 
-    const [newPostUser, setNewPostUser] = useState('') // 
-    const [newPostBody, setNewPostBody] = useState('') // 
-    const [newPostImage, setNewPostImage] = useState('') // 
-    const [newPostURL, setNewPostURL] = useState('') // 
+    const [newPostUser, setNewPostUser] = useState('') //
+    const [newPostBody, setNewPostBody] = useState('') //
+    const [newPostImage, setNewPostImage] = useState('') //
+    const [newPostURL, setNewPostURL] = useState('') //
     const [newPostCommunity, setNewPostCommunity] = useState('General')
 
     //////////////////////////////////////
@@ -86,7 +86,7 @@ const NewPost = (props) => {
                 <input name='image' type="text" value={newPostImage} onChange={handleImage} /><br />
                 <label htmlFor='url'>Link to an outside article:</label><br />
                 <input name='url' type="text" value={newPostURL} onChange={handleURL} /><br />
-                <input type='submit' />
+                <input className="submit-button" type='submit' />
             </form>
         </div >
     )
