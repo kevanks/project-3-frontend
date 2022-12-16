@@ -94,24 +94,27 @@ function App() {
     el.classList.add('hidden');
   }
 
-
+  // company name from https://namelix.com/app/?keywords=social+media
   return (
 
     < main >
-      <h1>Message Board</h1>
-      <Communities setAllPosts={setAllPosts} setCurrentCommunity={setCurrentCommunity} />
+      <img src='https://i.imgur.com/pVehru0.png' />
+      <h5>Putting your social life "on parade!"</h5>
+      {(currentUser.username) ? <div>
+        <h4>Logged in as: {currentUser.username} </h4>
+      </div> : null}
       <div className='button-container'>
-        {(currentUser.username) ? <div>
-          <h4>Logged in as: {currentUser.username} </h4>
-          <button className='button-50' onClick={handleLogout}>Logout</button>
-        </div> : null}
-        {(currentUser.username) ? <button className='button-50' onClick={handleShowNewForm}>New Post</button> : null}
-        {(currentUser.username) ? null : <button className='button-50' onClick={handleShowNewUserForm}>Sign Up!</button>}
-        {(currentUser.username) ? null : <button className='button-50' onClick={handleShowLoginForm}>Log In</button>}
+        {(currentUser.username) ? <>
+          <button className='button-50 header-button' onClick={handleLogout}>Logout</button>
+        </> : null}
+        {(currentUser.username) ? <button className='button-50 header-button' onClick={handleShowNewForm}>New Post</button> : null}
+        {(currentUser.username) ? null : <button className='button-50 header-button' onClick={handleShowNewUserForm}>Sign Up!</button>}
+        {(currentUser.username) ? null : <button className='button-50 header-button' onClick={handleShowLoginForm}>Log In</button>}
       </div>
       <div>
         <Search setAllPosts={setAllPosts} />
       </div>
+      <Communities setAllPosts={setAllPosts} setCurrentCommunity={setCurrentCommunity} updatePosts={updatePosts} />
       <div id='new-post-modal' className='modal hidden'>
         <NewPost updatePosts={updatePosts} handleHideNewForm={handleHideNewForm} currentUser={currentUser} />
       </div>
@@ -125,7 +128,6 @@ function App() {
         {allPosts.map((post) => {
           return (
             <PostCard post={post} setAllPosts={setAllPosts} updatePosts={updatePosts} currentUser={currentUser} />
-
           )
         })}
       </div>
