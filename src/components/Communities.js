@@ -37,7 +37,7 @@ const Communities = (props) => {
     return (
         <div className="communities-container">
             <div className="communities-title-container" onClick={handleShowCommunities}>
-                <span className="material-symbols-outlined">menu</span><p className="community-title">Communities</p>
+                <span className="material-symbols-outlined menu">menu</span><p className="community-title">Communities</p>
             </div>
             <ul id="communities-list" className="hidden">
                 <li className="community-li" onClick={props.updatePosts}>Homepage</li>

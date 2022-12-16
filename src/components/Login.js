@@ -27,14 +27,14 @@ const Login = (props) => {
     const handleLoginSubmit = (event) => {
         event.preventDefault()
         let userObj = {
-          username: username,
-          password: password
+            username: username,
+            password: password
         }
         if (password === userObj.password) {
-          props.handleHideLoginForm()
-          props.handleLogin(userObj)
+            props.handleHideLoginForm()
+            props.handleLogin(userObj)
         } else {
-          console.log('passwords dont match');
+            console.log('passwords dont match');
         }
     }
 
@@ -49,9 +49,9 @@ const Login = (props) => {
             </div>
             <form onSubmit={handleLoginSubmit}>
                 <label htmlFor='username'>Username:</label><br />
-                <input name='username' type="text" onChange={handleUsername} /><br />
+                <input name='username' type="text" onChange={handleUsername} className='text-input' /><br />
                 <label htmlFor='password'>Password:</label><br />
-                <input name='password' type="password" onChange={handlePassword} /><br />
+                <input name='password' type="password" onChange={handlePassword} className='text-input' /><br />
                 <input type='submit' />
             </form>
         </div>

@@ -55,7 +55,7 @@ img {
     top: 0;
     width: 100%;
     /* Full width */
-    height: 100%;
+    height: 90%;
     /* Full height */
     overflow: auto;
     /* Enable scroll if needed */
@@ -170,6 +170,23 @@ img {
     padding-right: 12px;
 }
 
+.text-input {
+    width: 60%;
+    max-width: 580px;
+    height: 36px;
+    border-radius: 4px;
+    padding-left: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid rgb(137, 151, 155);
+    outline: none;
+    color: rgb(33, 49, 60);
+    background-color: rgb(255, 255, 255);
+    padding-right: 12px;
+}
+
 .search-form {
     max-width: 600px;
     margin-left: auto;
@@ -184,6 +201,7 @@ img {
 
 .community-li {
     cursor: default;
+    font-size: 1.4em;
 }
 
 .community-li:hover {
@@ -232,6 +250,9 @@ h4 {
 
 .button-container .header-button {
     width: 30%;
+    max-width: 200px;
 }
 
-div span {}
+.menu {
+    padding-top: 3px;
+}

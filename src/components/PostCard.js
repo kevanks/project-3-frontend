@@ -140,49 +140,51 @@ const PostCard = (props) => {// need to update with ternaries
         <p className="post-body">{props.post.postBody}</p>
         <img src={props.post.imageURL} />
         <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
-        <p>Likes: {props.post.likes.length}</p>
+        <p>Likes: {props.post.likes.length}, Comments: {props.post.comments.length}</p>
         <button className="like-button" onClick={(e) => addLike(e, props.post)}>Like</button>
       </div>
       {(showModal) ?
-        <div id="modal-post">
-          <p>Posted by {props.post.user}</p>
-          <p className="post-body">{props.post.postBody}</p>
-          <img src={props.post.imageURL} />
-          <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
-          <button onClick={hideModal}>Close</button>
-          <button onClick={revealModalEdit}>Edit</button>
-          <button onClick={() => { deletePost(props.post) }}>Delete</button>
-          <h4>Comments</h4>
-          {props.post.comments.map((comment) => {
-            return (
+        <div className='modal'>
+          <div className="modal-form">
+            <p>Posted by {props.post.user}</p>
+            <p className="post-body">{props.post.postBody}</p>
+            <img src={props.post.imageURL} />
+            <a href={props.post.linkURL}>{props.post.linkURL}</a><br />
+            <button onClick={hideModal}>Close</button>
+            <button onClick={revealModalEdit}>Edit</button>
+            <button onClick={() => { deletePost(props.post) }}>Delete</button>
+            <h4>Comments</h4>
+            {props.post.comments.map((comment) => {
+              return (
+                <div>
+                  <p>{comment.user}: {comment.comment}</p>
+                </div>
+              )
+            })}
+            <button onClick={addComment}>Add Comment</button>
+            {(showAddComment) ?
               <div>
-                <p>{comment.user}: {comment.comment}</p>
+                <form onSubmit={addCommentToFeed}>
+                  <label>Comment:</label><br />
+                  <input name='comment' type='text' onChange={handleComment} className='text-input' /><br />
+                  <input type='submit' value='Submit Comment' />
+                </form>
               </div>
-            )
-          })}
-          <button onClick={addComment}>Add Comment</button>
-          {(showAddComment) ?
-            <div>
-              <form onSubmit={addCommentToFeed}>
-                <label>Comment:</label><br />
-                <input name='comment' type='text' onChange={handleComment} /><br />
-                <input type='submit' value='Submit Comment' />
-              </form>
-            </div>
-            : null}
+              : null}
+          </div>
         </div>
         : null}
       {(showModalEdit) ?
-        <div id="modal-edit">
-          <form onSubmit={(event) => { handleUpdatedPost(event, props.post) }}>
+        <div className='modal'>
+          <form className='modal-form' onSubmit={(event) => { handleUpdatedPost(event, props.post) }}>
             <label htmlFor='user'>Poster Username:</label><br />
-            <input name='user' type="text" defaultValue={props.post.user} onKeyUp={handleUpdatedUser} /><br />
+            <input name='user' type="text" defaultValue={props.post.user} onKeyUp={handleUpdatedUser} className='text-input' /><br />
             <label htmlFor='body'>Post Body:</label><br />
-            <input name='body' type="text" defaultValue={props.post.postBody} onKeyUp={handleUpdatedPostBody} /><br />
+            <input name='body' type="text" defaultValue={props.post.postBody} onKeyUp={handleUpdatedPostBody} className='text-input' /><br />
             <label htmlFor='image'>Include an image:</label><br />
-            <input name='image' type="text" defaultValue={props.post.imageURL} onKeyUp={handleUpdatedPostImg} /><br />
+            <input name='image' type="text" defaultValue={props.post.imageURL} onKeyUp={handleUpdatedPostImg} className='text-input' /><br />
             <label htmlFor='url'>Link to an outside article:</label><br />
-            <input name='url' type="text" defaultValue={props.post.linkURL} onKeyUp={handleUpdatedPostUrl} /><br />
+            <input name='url' type="text" defaultValue={props.post.linkURL} onKeyUp={handleUpdatedPostUrl} className='text-input' /><br />
             <input type='submit' />
             <button onClick={hideModalEdit}>Close</button>
           </form>
