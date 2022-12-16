@@ -144,7 +144,7 @@ const PostCard = (props) => {// need to update with ternaries
         <button className="like-button" onClick={(e) => addLike(e, props.post)}>Like</button>
       </div>
       {(showModal) ?
-        <div id="modal-form">
+        <div id="modal-post">
           <p>Posted by {props.post.user}</p>
           <p className="post-body">{props.post.postBody}</p>
           <img src={props.post.imageURL} />
