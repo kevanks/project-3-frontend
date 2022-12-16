@@ -134,7 +134,8 @@ img {
 }
 
 .button-50:hover {
-    text-decoration: none;
+  background-color: green;
+  color: white;
 }
 
 .button-50:active {
