@@ -181,9 +181,6 @@ img {
     vertical-align: middle;
 }
 
-.communities-title-container {
-    display: flex;
-}
 
 .community-li {
     cursor: default;
@@ -196,3 +193,45 @@ img {
 ul {
     list-style: none;
 }
+
+.communities-title-container {
+    display: flex;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    justify-content: center;
+}
+
+.communities-title-container p {
+    font-size: 26px;
+    margin: 0;
+    margin-left: 10px;
+}
+
+.communities-title-container span {
+    font-size: 26px;
+    height: fit-content;
+}
+
+.communities-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div ul {
+    text-align: center;
+}
+
+h5 {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+}
+
+.button-container .header-button {
+    width: 30%;
+}
+
+div span {}
