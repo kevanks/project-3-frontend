@@ -38,7 +38,7 @@ const NewPost = (props) => {
 
     const handlePostSubmit = (event) => {
         event.preventDefault()
-        axios.post('http://localhost:3000/',
+        axios.post('https://evening-mesa-52036.herokuapp.com/',
             {
                 user: props.currentUser.username,
                 postBody: newPostBody,
